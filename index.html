@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Interview Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#1e40af',
+                        accent: '#f59e0b',
+                        success: '#10b981',
+                        warning: '#f59e0b',
+                        error: '#ef4444'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <h1 class="text-3xl font-bold">Dynamic Interview Platform</h1>
+                <div class="flex space-x-4">
+                    <button onclick="showHome()" class="px-4 py-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition-all">
+                        Home
+                    </button>
+                    <button onclick="showTestMode()" class="px-4 py-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition-all">
+                        Start Test
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Home View -->
+        <div id="homeView" class="animate-fade-in">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Master Your Technical Interviews</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Comprehensive interview preparation platform with 8 technical categories, 
+                    automatic question generation, and professional test mode.
+                </p>
+            </div>
+
+            <!-- Categories Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="category-card bg-blue-500" data-category="ml">
+                    <div class="p-6 text-white">
+                        <div class="text-3xl mb-4">🤖</div>
+                        <h3 class="text-xl font-bold mb-2">Machine Learning</h3>
+                        <p class="text-blue-100 mb-4">Core ML concepts and algorithms</p>
+                        <div class="text-sm opacity-90">15 Questions</div>
+                    </div>
+                </div>
+
+                <div class="category-card bg-green-500" data-category="cloud">
+                    <div class="p-6 text-white">
+                        <div class="text-3xl mb-4">☁️</div>
+                        <h3 class="text-xl font-bold mb-2">Cloud Computing</h3>
+                        <p class="text-green-100 mb-4">Cloud platforms and deployment</p>
+                        <div class="text-sm opacity-90">12 Questions</div>
+                    </div>
+                </div>
+
+                <div class="category-card bg-yellow-500" data-category="python">
+                    <div class="p-6 text-white">
+                        <div class="text-3xl mb-4">🐍</div>
+                        <h3 class="text-xl font-bold mb-2">Python</h3>
+                        <p class="text-yellow-100 mb-4">Programming and data structures</p>
+                        <div class="text-sm opacity-90">18 Questions</div>
+                    </div>
+                </div>
+
+                <div class="category-card bg-red-500" data-category="ai">
+                    <div class="p-6 text-white">
+                        <div class="text-3xl mb-4">🧠</div>
+                        <h3 class="text-xl font-bold mb-2">AI Engineering</h3>
+                        <p class="text-red-100 mb-4">AI system design and production</p>
+                        <div class="text-sm opacity-90">14 Questions</div>
+                    </div>
+                </div>
+
+                <div class="category-card bg-purple-500" data-category="transformers">
+                    <div class="p-6 text-white">
+                        <div class="text-3xl mb-4">🔄</div>
+                        <h3 class="text-xl font-bold mb-2">Transformers</h3>
+                        <p class="text-purple-100 mb-4">Transformer models and LLMs</p>
+                        <div class="text-sm opacity-90">10 Questions</div>
+                    </div>
+                </div>
+
+                <div class="category-card bg-indigo-500" data-category="inference">
+                    <div class="p-6 text-white">
+                        <div class="text-3xl mb-4">⚡</div>
+                        <h3 class="text-xl font-bold mb-2">Inference Engines</h3>
+                        <p class="text-indigo-100 mb-4">Model optimization and deployment</p>
+                        <div class="text-sm opacity-90">8 Questions</div>
+                    </div>
+                </div>
+
+                <div class="category-card bg-pink-500" data-category="projects">
+                    <div class="p-6 text-white">
+                        <div class="text-3xl mb-4">💼</div>
+                        <h3 class="text-xl font-bold mb-2">Project Questions</h3>
+                        <p class="text-pink-100 mb-4">Technical project discussions</p>
+                        <div class="text-sm opacity-90">16 Questions</div>
+                    </div>
+                </div>
+
+                <div class="category-card bg-orange-500" data-category="behavioral">
+                    <div class="p-6 text-white">
+                        <div class="text-3xl mb-4">🗣️</div>
+                        <h3 class="text-xl font-bold mb-2">Behavioral</h3>
+                        <p class="text-orange-100 mb-4">Behavioral interview questions</p>
+                        <div class="text-sm opacity-90">20 Questions</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Quick Test</h3>
+                    <p class="text-gray-600 mb-6">Start a quick 10-question test from random categories</p>
+                    <button onclick="startQuickTest()" class="w-full bg-primary text-white py-3 px-6 rounded-lg hover:bg-blue-600 transition-colors font-semibold">
+                        Start Quick Test
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Custom Test</h3>
+                    <p class="text-gray-600 mb-6">Create a custom test by selecting specific categories</p>
+                    <button onclick="showCustomTest()" class="w-full bg-secondary text-white py-3 px-6 rounded-lg hover:bg-blue-800 transition-colors font-semibold">
+                        Create Custom Test
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Mode View -->
+        <div id="testView" class="hidden animate-fade-in">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <!-- Test Header -->
+                <div class="flex justify-between items-center mb-8">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">Interview Test</h2>
+                        <p class="text-gray-600">Question <span id="currentQuestion">1</span> of <span id="totalQuestions">10</span></p>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-sm text-gray-500">Time Remaining</div>
+                        <div id="timer" class="text-2xl font-bold text-primary">25:00</div>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-8">
+                    <div id="progressBar" class="bg-primary h-2 rounded-full progress-bar" style="width: 10%"></div>
+                </div>
+
+                <!-- Question Content -->
+                <div class="mb-8">
+                    <div class="flex items-center mb-4">
+                        <span id="categoryBadge" class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Machine Learning</span>
+                        <span id="difficultyBadge" class="ml-2 px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm font-medium">Medium</span>
+                    </div>
+                    <h3 id="questionTitle" class="text-xl font-bold text-gray-800 mb-4">
+                        Explain the difference between supervised and unsupervised learning
+                    </h3>
+                    <div id="questionContent" class="text-gray-700 leading-relaxed">
+                        Provide a comprehensive explanation of supervised vs unsupervised learning, including examples of each type and when you would use them in practice.
+                    </div>
+                </div>
+
+                <!-- Answer Input -->
+                <div class="mb-8">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Your Answer</label>
+                    <textarea id="answerInput" 
+                              class="w-full h-32 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+                              placeholder="Type your answer here..."></textarea>
+                </div>
+
+                <!-- Hint Section -->
+                <div id="hintSection" class="mb-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <div class="flex items-center justify-between">
+                        <h4 class="font-medium text-blue-800">💡 Hint Available</h4>
+                        <button onclick="toggleHint()" id="hintButton" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                            Show Hint
+                        </button>
+                    </div>
+                    <div id="hintContent" class="hidden mt-2 text-blue-700">
+                        Consider discussing training data, labels, algorithms like regression/classification vs clustering/dimensionality reduction.
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="flex justify-between">
+                    <button onclick="previousQuestion()" id="prevButton" class="px-6 py-3 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors font-medium">
+                        Previous
+                    </button>
+                    <div class="flex space-x-4">
+                        <button onclick="saveAndNext()" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors font-medium">
+                            Save & Next
+                        </button>
+                        <button onclick="finishTest()" id="finishButton" class="hidden px-6 py-3 bg-success text-white rounded-lg hover:bg-green-600 transition-colors font-medium">
+                            Finish Test
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results View -->
+        <div id="resultsView" class="hidden animate-fade-in">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <div class="text-center mb-8">
+                    <div class="text-6xl mb-4">🎉</div>
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Test Completed!</h2>
+                    <p class="text-gray-600">Great job on completing your interview practice session</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="text-center p-6 bg-blue-50 rounded-lg">
+                        <div class="text-2xl font-bold text-blue-600" id="questionsAnswered">10</div>
+                        <div class="text-blue-800">Questions Answered</div>
+                    </div>
+                    <div class="text-center p-6 bg-green-50 rounded-lg">
+                        <div class="text-2xl font-bold text-green-600" id="timeSpent">23:45</div>
+                        <div class="text-green-800">Time Spent</div>
+                    </div>
+                    <div class="text-center p-6 bg-purple-50 rounded-lg">
+                        <div class="text-2xl font-bold text-purple-600" id="categoriesCovered">5</div>
+                        <div class="text-purple-800">Categories Covered</div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button onclick="startNewTest()" class="px-8 py-3 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors font-medium mr-4">
+                        Start New Test
+                    </button>
+                    <button onclick="showHome()" class="px-8 py-3 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors font-medium">
+                        Back to Home
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 Dynamic Interview Platform. Built for technical interview excellence.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample Questions Database
+        const questionsDB = {
+            ml: [
+                {
+                    id: 1,
+                    title: "Explain the difference between supervised and unsupervised learning",
+                    content: "Provide a comprehensive explanation of supervised vs unsupervised learning, including examples of each type and when you would use them in practice.",
+                    difficulty: "Medium",
+                    hint: "Consider discussing training data, labels, algorithms like regression/classification vs clustering/dimensionality reduction.",
+                    type: "essay"
+                },
+                {
+                    id: 2,
+                    title: "What is overfitting and how can you prevent it?",
+                    content: "Explain the concept of overfitting in machine learning models and describe various techniques to prevent or mitigate it.",
+                    difficulty: "Medium",
+                    hint: "Think about validation techniques, regularization, cross-validation, and early stopping.",
+                    type: "essay"
+                },
+                {
+                    id: 3,
+                    title: "Describe the bias-variance tradeoff",
+                    content: "Explain the bias-variance tradeoff in machine learning and how it affects model performance.",
+                    difficulty: "Hard",
+                    hint: "Consider how model complexity affects both bias and variance, and the relationship to overfitting/underfitting.",
+                    type: "essay"
+                }
+            ],
+            cloud: [
+                {
+                    id: 4,
+                    title: "Explain the difference between IaaS, PaaS, and SaaS",
+                    content: "Compare and contrast Infrastructure as a Service, Platform as a Service, and Software as a Service with examples.",
+                    difficulty: "Easy",
+                    hint: "Think about the level of abstraction and what each service model provides to users.",
+                    type: "essay"
+                },
+                {
+                    id: 5,
+                    title: "How would you design a scalable web application architecture?",
+                    content: "Design a cloud-based architecture for a web application that can handle millions of users.",
+                    difficulty: "Hard",
+                    hint: "Consider load balancers, auto-scaling, databases, caching, and CDNs.",
+                    type: "essay"
+                }
+            ],
+            python: [
+                {
+                    id: 6,
+                    title: "Explain Python's GIL and its implications",
+                    content: "What is the Global Interpreter Lock in Python and how does it affect multithreading?",
+                    difficulty: "Medium",
+                    hint: "Consider the impact on CPU-bound vs I/O-bound tasks and alternatives like multiprocessing.",
+                    type: "essay"
+                },
+                {
+                    id: 7,
+                    title: "Implement a decorator that measures execution time",
+                    content: "Write a Python decorator that measures and prints the execution time of a function.",
+                    difficulty: "Medium",
+                    hint: "Use the time module and functools.wraps to preserve function metadata.",
+                    type: "code"
+                }
+            ],
+            ai: [
+                {
+                    id: 8,
+                    title: "How would you deploy an ML model to production?",
+                    content: "Describe the process and considerations for deploying a machine learning model to production.",
+                    difficulty: "Hard",
+                    hint: "Consider model serving, monitoring, versioning, A/B testing, and infrastructure requirements.",
+                    type: "essay"
+                }
+            ],
+            transformers: [
+                {
+                    id: 9,
+                    title: "Explain the attention mechanism in transformers",
+                    content: "Describe how the attention mechanism works in transformer models and why it's effective.",
+                    difficulty: "Hard",
+                    hint: "Consider self-attention, multi-head attention, and the advantages over RNNs.",
+                    type: "essay"
+                }
+            ],
+            inference: [
+                {
+                    id: 10,
+                    title: "What are the techniques for model optimization?",
+                    content: "Describe various techniques for optimizing machine learning models for inference.",
+                    difficulty: "Medium",
+                    hint: "Consider quantization, pruning, distillation, and hardware-specific optimizations.",
+                    type: "essay"
+                }
+            ],
+            projects: [
+                {
+                    id: 11,
+                    title: "Describe a challenging project you've worked on",
+                    content: "Walk me through a complex technical project, the challenges you faced, and how you solved them.",
+                    difficulty: "Medium",
+                    hint: "Structure your answer with problem, approach, challenges, solutions, and results.",
+                    type: "essay"
+                }
+            ],
+            behavioral: [
+                {
+                    id: 12,
+                    title: "Tell me about a time you had to learn a new technology quickly",
+                    content: "Describe a situation where you had to rapidly acquire new technical skills for a project.",
+                    difficulty: "Easy",
+                    hint: "Use the STAR method: Situation, Task, Action, Result.",
+                    type: "essay"
+                }
+            ]
+        };
+
+        // Application State
+        let currentTest = {
+            questions: [],
+            currentIndex: 0,
+            answers: {},
+            startTime: null,
+            category: null
+        };
+
+        let timerInterval = null;
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            setupEventListeners();
+            showHome();
+        });
+
+        function setupEventListeners() {
+            // Category card clicks
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    startCategoryTest(category);
+                });
+                card.classList.add('cursor-pointer', 'card-hover', 'rounded-xl', 'shadow-lg');
+            });
+        }
+
+        function showHome() {
+            document.getElementById('homeView').classList.remove('hidden');
+            document.getElementById('testView').classList.add('hidden');
+            document.getElementById('resultsView').classList.add('hidden');
+            stopTimer();
+        }
+
+        function showTestMode() {
+            document.getElementById('homeView').classList.add('hidden');
+            document.getElementById('testView').classList.remove('hidden');
+            document.getElementById('resultsView').classList.add('hidden');
+        }
+
+        function showResults() {
+            document.getElementById('homeView').classList.add('hidden');
+            document.getElementById('testView').classList.add('hidden');
+            document.getElementById('resultsView').classList.remove('hidden');
+            stopTimer();
+        }
+
+        function startQuickTest() {
+            // Select random questions from all categories
+            const allQuestions = [];
+            Object.values(questionsDB).forEach(categoryQuestions => {
+                allQuestions.push(...categoryQuestions);
+            });
+            
+            // Shuffle and select 10 questions
+            const shuffled = allQuestions.sort(() => 0.5 - Math.random());
+            currentTest.questions = shuffled.slice(0, 10);
+            currentTest.currentIndex = 0;
+            currentTest.answers = {};
+            currentTest.startTime = new Date();
+            currentTest.category = 'Mixed';
+            
+            startTest();
+        }
+
+        function startCategoryTest(category) {
+            const categoryQuestions = questionsDB[category] || [];
+            currentTest.questions = [...categoryQuestions];
+            currentTest.currentIndex = 0;
+            currentTest.answers = {};
+            currentTest.startTime = new Date();
+            currentTest.category = category;
+            
+            startTest();
+        }
+
+        function startTest() {
+            showTestMode();
+            updateTestUI();
+            startTimer();
+        }
+
+        function updateTestUI() {
+            const question = currentTest.questions[currentTest.currentIndex];
+            if (!question) return;
+
+            document.getElementById('currentQuestion').textContent = currentTest.currentIndex + 1;
+            document.getElementById('totalQuestions').textContent = currentTest.questions.length;
+            document.getElementById('questionTitle').textContent = question.title;
+            document.getElementById('questionContent').textContent = question.content;
+            
+            // Update badges
+            const categoryNames = {
+                ml: 'Machine Learning',
+                cloud: 'Cloud Computing',
+                python: 'Python',
+                ai: 'AI Engineering',
+                transformers: 'Transformers',
+                inference: 'Inference Engines',
+                projects: 'Projects',
+                behavioral: 'Behavioral'
+            };
+            
+            document.getElementById('categoryBadge').textContent = categoryNames[currentTest.category] || 'Mixed';
+            document.getElementById('difficultyBadge').textContent = question.difficulty;
+            
+            // Update difficulty badge color
+            const difficultyBadge = document.getElementById('difficultyBadge');
+            difficultyBadge.className = 'ml-2 px-3 py-1 rounded-full text-sm font-medium ';
+            if (question.difficulty === 'Easy') {
+                difficultyBadge.className += 'bg-green-100 text-green-800';
+            } else if (question.difficulty === 'Medium') {
+                difficultyBadge.className += 'bg-yellow-100 text-yellow-800';
+            } else {
+                difficultyBadge.className += 'bg-red-100 text-red-800';
+            }
+            
+            // Update progress bar
+            const progress = ((currentTest.currentIndex + 1) / currentTest.questions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            
+            // Update answer input
+            const savedAnswer = currentTest.answers[question.id] || '';
+            document.getElementById('answerInput').value = savedAnswer;
+            
+            // Update hint
+            document.getElementById('hintContent').textContent = question.hint;
+            document.getElementById('hintContent').classList.add('hidden');
+            document.getElementById('hintButton').textContent = 'Show Hint';
+            
+            // Update navigation buttons
+            document.getElementById('prevButton').disabled = currentTest.currentIndex === 0;
+            document.getElementById('prevButton').classList.toggle('opacity-50', currentTest.currentIndex === 0);
+            
+            const isLastQuestion = currentTest.currentIndex === currentTest.questions.length - 1;
+            document.getElementById('finishButton').classList.toggle('hidden', !isLastQuestion);
+        }
+
+        function toggleHint() {
+            const hintContent = document.getElementById('hintContent');
+            const hintButton = document.getElementById('hintButton');
+            
+            if (hintContent.classList.contains('hidden')) {
+                hintContent.classList.remove('hidden');
+                hintButton.textContent = 'Hide Hint';
+            } else {
+                hintContent.classList.add('hidden');
+                hintButton.textContent = 'Show Hint';
+            }
+        }
+
+        function saveCurrentAnswer() {
+            const question = currentTest.questions[currentTest.currentIndex];
+            const answer = document.getElementById('answerInput').value;
+            currentTest.answers[question.id] = answer;
+        }
+
+        function previousQuestion() {
+            if (currentTest.currentIndex > 0) {
+                saveCurrentAnswer();
+                currentTest.currentIndex--;
+                updateTestUI();
+            }
+        }
+
+        function saveAndNext() {
+            saveCurrentAnswer();
+            if (currentTest.currentIndex < currentTest.questions.length - 1) {
+                currentTest.currentIndex++;
+                updateTestUI();
+            } else {
+                finishTest();
+            }
+        }
+
+        function finishTest() {
+            saveCurrentAnswer();
+            
+            // Calculate results
+            const answeredQuestions = Object.keys(currentTest.answers).length;
+            const timeSpent = new Date() - currentTest.startTime;
+            const timeSpentFormatted = formatTime(Math.floor(timeSpent / 1000));
+            
+            // Get unique categories
+            const categories = new Set();
+            currentTest.questions.forEach(q => {
+                Object.keys(questionsDB).forEach(cat => {
+                    if (questionsDB[cat].some(cq => cq.id === q.id)) {
+                        categories.add(cat);
+                    }
+                });
+            });
+            
+            // Update results display
+            document.getElementById('questionsAnswered').textContent = answeredQuestions;
+            document.getElementById('timeSpent').textContent = timeSpentFormatted;
+            document.getElementById('categoriesCovered').textContent = categories.size;
+            
+            showResults();
+        }
+
+        function startNewTest() {
+            currentTest = {
+                questions: [],
+                currentIndex: 0,
+                answers: {},
+                startTime: null,
+                category: null
+            };
+            showHome();
+        }
+
+        function startTimer() {
+            let timeLeft = 25 * 60; // 25 minutes in seconds
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer').textContent = formatTime(timeLeft);
+                
+                if (timeLeft <= 0) {
+                    finishTest();
+                }
+            }, 1000);
+        }
+
+        function stopTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+
+        function showCustomTest() {
+            alert('Custom test feature coming soon! For now, try clicking on individual categories or start a quick test.');
+        }
+    </script>
+</body>
+</html>
+

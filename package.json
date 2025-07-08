@@ -1,0 +1,27 @@
+{
+  "name": "dynamic-interview-platform",
+  "version": "1.0.0",
+  "description": "A comprehensive Dynamic Interview Platform with 8 technical categories, test mode, automatic question generation, and professional interface for technical interview preparation.",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve .",
+    "build": "echo 'No build step required for static site'",
+    "dev": "serve ."
+  },
+  "keywords": [
+    "interview",
+    "technical",
+    "preparation",
+    "machine-learning",
+    "cloud-computing",
+    "python",
+    "ai",
+    "transformers"
+  ],
+  "author": "Dynamic Interview Platform",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}
+
